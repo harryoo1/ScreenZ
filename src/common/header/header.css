@@ -1,0 +1,24 @@
+.app-header{
+    background-color: rgb(12, 12, 12);
+    height: 46px;
+    padding: 10px 32px 10px 46px;
+
+}
+.header-btn{
+    float: right;
+    margin-top: 5px;
+    
+}
+.app-logo {
+    animation: app-logo-spin infinite 4s linear;
+    height: 45px;
+    background: rgb(100, 120, 238);
+ }
+ 
+ @keyframes app-logo-spin {
+    from { transform: scaleX(-1); }
+ }
+ .app-logo-text{
+    color: #fff;
+    background-color: rgb(100, 120, 238);
+ }
