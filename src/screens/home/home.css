@@ -1,0 +1,9 @@
+.secondary-header{
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    font-size: 1.2rem;
+    background: rgb(124, 142, 248);
+    color: white;
+    text-align: center;
+}
