@@ -1,9 +1,18 @@
-.secondary-header{
-    width: 100%;
-    height: auto;
-    padding: 10px;
-    font-size: 1.2rem;
-    background: rgb(124, 142, 248);
-    color: white;
-    text-align: center;
+::-webkit-scrollbar {
+  width: 4px;
+  background-color:  rgba(0,0,0,.2);
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #999999;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: grey;
 }
