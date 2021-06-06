@@ -16,6 +16,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import Confirmation from '../confirmation/Confirmation';
 
 class BookShow extends Component {
     constructor(){
@@ -24,7 +26,15 @@ class BookShow extends Component {
             location: "",
             language: "",
             showDate: "",
-            showTime: ""
+            showTime: "",
+            tickets: 0,
+            unitPrice: 500,
+            availableTickets: 20,
+            reqLocation: "dispNone",
+            reqLanguage: "dispNone",
+            reqShowDate: "dispNone",
+            reqShowTime: "dispNone",
+            reqTickets: "dispNone"
         }
     }
     backToHandler = () =>
@@ -43,7 +53,19 @@ class BookShow extends Component {
     }
 
     showTimeSelectHandler = event => {
-        this.setState({ showTime: event.target.value });
+        this.setState({showTime: event.target.value });
+    }
+    ticketSelectHandler = event => {
+        this.setState({tickets: event.target.value});
+    }
+    bookShowButtonHandler = () => {
+        this.state.location === "" ? this.setState({ reqLocation: "dispBlock" }) : this.setState({ reqLocation: "dispNone" });
+        this.state.language === "" ? this.setState({ reqLanguage: "dispBlock" }) : this.setState({ reqLanguage: "dispNone" });
+        this.state.showDate === "" ? this.setState({ reqShowDate: "dispBlock" }) : this.setState({ reqShowDate: "dispNone" });
+        this.state.showTime === "" ? this.setState({ reqShowTime: "dispBlock" }) : this.setState({ reqShowTime: "dispNone" });
+        this.state.tickets === 0 ? this.setState({ reqTickets: "dispBlock" }) : this.setState({ reqTickets: "dispNone" });
+
+        ReactDOM.render(<Confirmation bookingSummary={this.state} />, document.getElementById('root'));
     }
     render() {
         return(
@@ -71,10 +93,13 @@ class BookShow extends Component {
                                         </MenuItem>
                                     ))}
                                 </Select>
+                                <FormHelperText className={this.state.reqLocation}>
+                                    <span className="red">Required</span>
+                                </FormHelperText>
                         </FormControl>
                         <br /><br />
                             <FormControl required className="formControl">
-                                <InputLabel htmlFor="language">Choose Language:</InputLabel>
+                                <InputLabel htmlFor="language">Choose Language :</InputLabel>
                                 <Select
                                     value={this.state.language}
                                     onChange={this.languageSelectHandler}>
@@ -84,10 +109,13 @@ class BookShow extends Component {
                                         </MenuItem>
                                     ))}
                                 </Select>
+                                <FormHelperText className={this.state.reqLanguage}>
+                                    <span className="red">Required</span>
+                                </FormHelperText>
                             </FormControl>
                             <br /><br />
                             <FormControl required className="formControl">
-                                <InputLabel htmlFor="showDate">Choose Show Date:</InputLabel>
+                                <InputLabel htmlFor="showDate">Choose Show Date :</InputLabel>
                                 <Select
                                     value={this.state.showDate}
                                     onChange={this.showDateSelectHandler}>
@@ -97,10 +125,13 @@ class BookShow extends Component {
                                         </MenuItem>
                                     ))}
                                 </Select>
+                                <FormHelperText className={this.state.reqShowDate}>
+                                    <span className="red">Required</span>
+                                </FormHelperText>
                             </FormControl>
                             <br /><br />
                             <FormControl required className="formControl">
-                                <InputLabel htmlFor="showTime">Choose Show Time:</InputLabel>
+                                <InputLabel htmlFor="showTime">Choose Show Time :</InputLabel>
                                 <Select
                                     value={this.state.showTime}
                                     onChange={this.showTimeSelectHandler}>
@@ -110,8 +141,25 @@ class BookShow extends Component {
                                         </MenuItem>
                                     ))}
                                 </Select>
+                                <FormHelperText className={this.state.reqShowTime}>
+                                    <span className="red">Required</span>
+                                </FormHelperText>
                             </FormControl>
                             <br /><br />
+                            <FormControl required className="formControl">
+                            <InputLabel htmlFor="tickets">Tickets : ({this.state.availableTickets} available)</InputLabel>
+                            <Input id="tickets" value={this.state.tickets !== 0 ? this.state.tickets: ""} onChange={this.ticketSelectHandler}/>
+                            <FormHelperText className={this.state.reqTickets}>
+                                    <span className="red">Required</span>
+                                </FormHelperText>
+                            </FormControl><br/><br/>
+                            <Typography>
+                                Unit Price : Rs. {this.state.unitPrice}
+                            </Typography>
+                            <Typography>
+                                Total Price : Rs. {this.state.unitPrice * this.state.tickets}
+                            </Typography><br/>
+                            <Button variant="contained" onClick={this.bookShowButtonHandler} color="primary" style={{width: 240}}>Book</Button>
                         </CardContent>
                     </Card>
                 </div>
