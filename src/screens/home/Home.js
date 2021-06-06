@@ -131,7 +131,7 @@ class Home extends Component{
                                 <Select
                                 multiple
                                 input={<Input id="select-multiple-genres"/>}
-                                renderValue={selected => selected.join(',')}
+                                renderValue={selected => selected.join(', ')}
                                 value={this.state.genres}
                                 onChange={this.genreSelectHandler}>
                                     <MenuItem value="0">None</MenuItem>
@@ -148,7 +148,7 @@ class Home extends Component{
                                 <Select
                                 multiple
                                 input={<Input id="select-multiple-artists"/>}
-                                renderValue={selected => selected.join(',')}
+                                renderValue={selected => selected.join(', ')}
                                 value={this.state.artists}
                                 onChange={this.artistSelectHandler}>
                                     <MenuItem value="0">None</MenuItem>
@@ -184,7 +184,7 @@ class Home extends Component{
                 </div>
 
             </div>
-        )
+        );
     }
 }
 export default withStyles(styles)(Home);

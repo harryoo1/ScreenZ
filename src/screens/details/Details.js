@@ -15,7 +15,7 @@ class Details extends Component{
     constructor(){
         super();
         this.state = {
-            movie: {},
+            movie: "",
             starIcons: [
                 {
                    id: 1,
@@ -83,13 +83,13 @@ class Details extends Component{
         }
         return(
             <div className="details">
-                <Header/>
+                <Header bookShowButton="true"/>
                 <div className="back-btn">
                     <Typography onClick={this.backToHandler}>
                         &#60; Back to Home
                     </Typography>
                 </div>
-                <div className="flex-containerDetails">
+                {/* <div className="flex-containerDetails">
                     <div className="leftDetails">
                     <img src={movie.poster_url} alt={movie.title} />
                     </div>
@@ -128,7 +128,7 @@ class Details extends Component{
                     </div>
                     <div className="rightDetails">
                         <Typography><span className="bpld">Rate this Movie : </span></Typography>
-                        {this .state.starIcons.map(star => (
+                        {this.state.starIcons.map(star => (
                             <StarBorderIcon className={star.color} key={"star" + star.id} onClick={()=> this.starCliclHandler(star.id)}/>
                         ))}
                     <div className="bold marginBottom16 marginTop16">
@@ -152,9 +152,9 @@ class Details extends Component{
                             </GridList>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
-        )
+        );
     }
 }
 export default Details;
