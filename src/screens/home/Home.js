@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import './home.css';
+import ReactDOM from 'react-dom';
+import Details from '../../screens/details/Details';
 import Header from '../../common/header/Header';
 import {withStyles} from '@material-ui/core/styles';
 import moviesData from '../../common/movieData';
@@ -19,6 +21,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Checkbox from '@material-ui/core/Checkbox';
 import ListItemText from '@material-ui/core/ListItemText';
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+
 
 const styles = theme => ({
     root: {
@@ -49,6 +53,11 @@ const styles = theme => ({
      },
      title: {
         color: theme.palette.primary.light,
+     },
+     filterBtn:{
+        minWidth: 240,
+        maxWidth: 240,
+        margin: 10
      }
 });
 
@@ -70,6 +79,10 @@ class Home extends Component{
     artistSelectHandler = event => {
         this.setState({artists: event.target.value});
     }
+    movieClickHandler = (movieID) => {
+        ReactDOM.render(<Details movieID={movieID}/>, document.getElementById('root'));
+    }
+
     render(){
         const {classes} = this.props;
         return(
@@ -91,7 +104,7 @@ class Home extends Component{
                     <div className="left">
                         <GridList cellHeight={350} cols={4} className={classes.gridListMain}>
                             {moviesData.map(movie => (
-                                <GridListTile className="released-movie-grid-item" key={"grid" + movie.id}>
+                                <GridListTile onClick={() => this.movieClickHandler(movie.id)} className="released-movie-grid-item" key={"grid" + movie.id}>
                                     <img src={movie.poster_url} className="movie-poster" alt={movie.title} />
                                     <GridListTileBar
                                         title={movie.title}
@@ -103,7 +116,7 @@ class Home extends Component{
                     </div>
                     <div className="right">
                         <Card>
-                            <CardContent>
+                            <CardContent style={{textAlign: 'center'}}>
                                 <FormControl className={classes.formControl}>
                                     <Typography className={classes.title} color="textSecondary">
                                         Find Movies By : 
@@ -156,6 +169,15 @@ class Home extends Component{
                                     defaultValue=""
                                     InputLabelProps={{shrink: true}}/>
                                 </FormControl>
+                                <FormControl className={classes.formControl}>
+                                    <TextField
+                                    id="releaseDateEnd"
+                                    label="Release Date End"
+                                    type="date"
+                                    defaultValue=""
+                                    InputLabelProps={{shrink: true}}/>
+                                </FormControl>
+                                    <Button className={classes.filterBtn} variant="contained" color="primary" onClick={this.applyFilterHandler}>Appply</Button>
                             </CardContent>
                         </Card>
                     </div>
